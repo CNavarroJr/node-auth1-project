@@ -20,9 +20,9 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async (req, res) => {
   let {username, password} = req.body;
 
-  const [user] = await users.findBy({ username });
 
   try {
+    const [user] = await users.findBy({ username });
     if (user && bcrypt.compareSync(password, user.password)) {
       req.session.user = user;
       console.log('added user to req.session')

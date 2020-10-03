@@ -1,35 +1,35 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
-// const errorHandler = require("./errorHandler.js");
+const errorHandler = require("./errorHandler.js");
 const session = require("express-session");
 const KnexSessionStore = require("connect-session-knex");
 
 
-const userRouter = require("./users/users-router.js");
-const authRouter = require("./auth/auth-router.js");
+const userRouter = require("../users/users-router.js");
+const authRouter = require("../auth/auth-router.js");
 
 const server = express();
 
 const sessionConfig = {
-  name: "monkey",
-  secret: "I can't tell you because its a secret",
+  name: "sakcookie",
+  secret: "i can't tell you because its a secret",
   cookie: {
     maxAge: 60 * 60 * 1000,
     secure: false,
-    httpOnly: true
+    httpOnly: true,
   },
   resave: false,
-  saveUnitialized: false,
+  saveUninitialized: false,
 
 
-  store: new KnexSessionStore({
-    knex: require("../database/connection.js"),
-    tablename: 'sessions',
-    sidfieldname: 'sid',
-    createtable: true,
-    clearInterval: 60 * 60 * 1000
-  })
+  // store: new KnexSessionStore({
+  //   knex: require('../database/connection.js'),
+  //   tablename: 'sessions',
+  //   sidfieldname: 'sid',
+  //   createtable: true,
+  //   clearInterval: 60 * 60 *1000,
+  // })
 }
 
 
